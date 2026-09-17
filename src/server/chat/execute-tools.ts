@@ -271,7 +271,7 @@ export async function executeTools(
       stepDoneCalled = true
     }
 
-    if (toolResult.success && toolResult.truncated) {
+    if (toolResult.success && toolResult.truncated && (toolResult.output?.length ?? 0) > 50000) {
       try {
         const agents = await loadAllAgentsDefault()
         const agentDef = findAgentById('output_compactor', agents)
